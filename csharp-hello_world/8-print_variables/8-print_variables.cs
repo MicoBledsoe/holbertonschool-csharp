@@ -4,8 +4,8 @@ class Program
 {
     static void Main(string[] args)
     {
-        int number = 972;
-        string street = "Mission Street";
-        Console.WriteLine("{0} {1}", number, street);
+        string str1 = "972";
+        string str2 = "Mission Street";
+        Console.WriteLine("{0} {1}", str1, str2);
     }
 }
