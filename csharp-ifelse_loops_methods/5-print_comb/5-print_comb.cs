@@ -1,20 +1,26 @@
 using System;
 
-public class CounterUp
+public class Program
 {
-    static void Main(string[] args)
+    public static void Main(string[] args)
     {
-        for(int count = 0; count <= 100; count++)
-        {
-            Console.Write(count.ToString("00"));
+        string output = "";
 
-            if(count < 99)
-            {
-                Console.Write(", ");
-            }
+        for (int number = 0; number < 100; number++)
         {
-            Console.Write("\n");
+            if (number < 10)
+            {
+                output += "0";
+            }
+
+            output += number;
+
+            if (number < 99)
+            {
+                output += ", ";
+            }
         }
-        }
+
+        Console.Write(output + "\n");
     }
 }
