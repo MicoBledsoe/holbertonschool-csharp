@@ -6,7 +6,7 @@ public class CounterUp
     {
         for(int count = 0; count <= 100; count++)
         {
-            Console.Write(num.ToString("00"));
+            Console.Write(count.ToString("00"));
 
             if(count < 99)
             {
