@@ -1,19 +1,22 @@
 using NUnit.Framework;
-using System;
 using System.Collections.Generic;
 using InventoryLibrary;
 
 namespace InventoryManagement.Tests
 {
+    [TestFixture]
     public class Tests
     {
+        private JSONStorage storage;
+
         [SetUp]
         public void Setup()
         {
+            storage = new JSONStorage();
         }
 
         [Test]
-        public void Test_BaseId()
+        public void BaseClass_IdIsUnique()
         {
             BaseClass a = new BaseClass();
             BaseClass b = new BaseClass();
@@ -22,7 +25,7 @@ namespace InventoryManagement.Tests
         }
 
         [Test]
-        public void Test_BaseDateTime()
+        public void BaseClass_DateCreatedAndDateUpdated()
         {
             BaseClass b = new BaseClass();
 
@@ -32,71 +35,71 @@ namespace InventoryManagement.Tests
         }
 
         [Test]
-        public void Test_ItemName()
+        public void Item_NameAndDescriptionAndTags()
         {
-            Item i = new Item("Item Name");
+            Item item = new Item("Item Name");
 
-            Assert.AreEqual(i.name, "Item Name");
-            Assert.IsNotNull(i.name);
-            Assert.IsNull(i.description);
-            Assert.IsNull(i.tags);
+            Assert.AreEqual(item.name, "Item Name");
+            Assert.IsNotNull(item.name);
+            Assert.IsNull(item.description);
+            Assert.IsNull(item.tags);
         }
 
         [Test]
-        public void Test_ItemDescription()
+        public void Item_DescriptionAndTags()
         {
-            Item i = new Item("Item Thing", "Item Description");
+            Item item = new Item("Item Thing", "Item Description");
 
-            Assert.AreEqual(i.description, "Item Description");
-            Assert.IsNotNull(i.description);
-            Assert.IsNull(i.tags);
+            Assert.AreEqual(item.description, "Item Description");
+            Assert.IsNotNull(item.description);
+            Assert.IsNull(item.tags);
         }
 
         [Test]
-        public void Test_ItemPrice()
+        public void Item_Price()
         {
-            Item i = new Item("Item Thing", "Item Description", 5.00f);
+            Item item = new Item("Item Thing", "Item Description", 5.00f);
 
-            Assert.AreEqual(i.price, 5.00);
+            Assert.AreEqual(item.price, 5.00);
         }
 
         [Test]
-        public void Test_UserName()
+        public void User_Name()
         {
-            User u = new User("User Name");
+            User user = new User("User Name");
 
-            Assert.AreEqual(u.name, "User Name");
+            Assert.AreEqual(user.name, "User Name");
         }
 
         [Test]
-        public void Test_InventoryUserId()
+        public void Inventory_UserIdAndItemId()
         {
             Inventory inventory = new Inventory("User ID", "Item ID", 1);
 
             Assert.AreEqual(inventory.user_id, "User ID");
-            Assert.AreNotEqual(inventory.user_id, "Item ID");
+            Assert.AreNotEqual(inventory.user_id, inventory.item_id);
         }
 
         [Test]
-        public void Test_InventoryItemId()
+        public void Inventory_ItemId()
         {
             Inventory inventory = new Inventory("User ID", "Item ID", 1);
 
             Assert.AreEqual(inventory.item_id, "Item ID");
-            Assert.AreNotEqual(inventory.item_id, "User ID");
-        }
-
-        [Test]
-        public void Test_InventoryQuantityPos()
-        {
-            Inventory inventory = new Inventory("User ID", "Item ID", 1);
-
-            Assert.AreEqual(inventory.quantity, 1);
             Assert.AreNotEqual(inventory.item_id, inventory.user_id);
         }
 
         [Test]
-        public void Test_InventoryQuantityZero()
+        public void Inventory_QuantityPositive()
+        {
+            Inventory inventory = new Inventory("User ID", "Item ID", 1);
+
+            Assert.AreEqual(inventory.quantity, 1);
+            Assert.AreNotEqual(inventory.quantity, 0);
+        }
+
+        [Test]
+        public void Inventory_QuantityZero()
         {
             Inventory inventory = new Inventory("User ID", "Item ID", 0);
 
@@ -105,7 +108,7 @@ namespace InventoryManagement.Tests
         }
 
         [Test]
-        public void Test_InventoryQuantityNeg()
+        public void Inventory_QuantityNegative()
         {
             Inventory inventory = new Inventory("User ID", "Item ID", -1);
 
@@ -114,12 +117,11 @@ namespace InventoryManagement.Tests
         }
 
         [Test]
-        public void Test_JSONStorage()
+        public void JSONStorage_ObjectsIsEmpty()
         {
-            JSONStorage storage= new JSONStorage();
             Dictionary<string, object> example = new Dictionary<string, object>();
 
-            Assert.AreEqual(storage.objects, example);
+            Assert.AreEqual(storage.objects.Count, example.Count);
         }
     }
 }
