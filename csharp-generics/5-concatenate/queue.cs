@@ -127,14 +127,14 @@ class Queue<T>
     /// </summary>
     /// <return> return the string concatenated</return>
     public string Concatenate()
-{
+    {
     if (head == null)
     {
         Console.WriteLine("Queue is empty");
         return null;
     }
 
-    if (typeof(T) == typeof(string) || typeof(T) == typeof(char))
+        if (typeof(T) == typeof(string) || typeof(T) == typeof(char))
     {
         StringBuilder tmp = new StringBuilder();
         Node current = head;
@@ -158,5 +158,5 @@ class Queue<T>
         Console.WriteLine("Concatenate() is for a queue of Strings or Chars only.");
         return null;
     }
-}
+    }
 }
