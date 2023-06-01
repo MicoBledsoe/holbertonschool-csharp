@@ -1,133 +1,125 @@
 using NUnit.Framework;
+using System;
+using System.Collections.Generic;
 using InventoryLibrary;
 
 namespace InventoryManagement.Tests
 {
     public class Tests
     {
-        private BaseClass testCase;
-        private Item testItem;
-        private User testUser;
-
         [SetUp]
         public void Setup()
         {
-            testCase = new BaseClass();
-            testItem = new Item("testItem");
-            testUser = new User("testUser");
         }
 
         [Test]
-        public void PropertyTypeTests()
+        public void Test_BaseId()
         {
-            Assert.IsInstanceOf<string>(testCase.id);
-            Assert.IsInstanceOf<System.DateTime>(testCase.date_created);
-            Assert.IsInstanceOf<System.DateTime>(testCase.date_updated);
+            BaseClass a = new BaseClass();
+            BaseClass b = new BaseClass();
 
-            Assert.IsNotNull(testCase.id);
-            Assert.IsNotNull(testCase.date_created);
-            Assert.IsNotNull(testCase.date_updated);
+            Assert.AreNotEqual(a.id, b.id);
         }
 
         [Test]
-        public void ItemTest()
+        public void Test_BaseDateTime()
         {
-            Assert.IsInstanceOf<string>(testItem.name);
-            Assert.IsInstanceOf<string>(testItem.description);
-            Assert.IsInstanceOf<float>(testItem.price);
-            Assert.IsInstanceOf<string[]>(testItem.tags);
+            BaseClass b = new BaseClass();
 
-            Assert.IsNotNull(testItem.name);
-        }
-
-        [TestCase(new object[] { "dogs" }, ExpectedResult = 1)]
-        [TestCase(new object[] { "dogs", "cats" }, ExpectedResult = 2)]
-        [TestCase(new object[] { "dogs", "cats", "dogs" }, ExpectedResult = 2)]
-        [TestCase(new object[] { "dogs", "cats", "dogs", "cats" }, ExpectedResult = 2)]
-        [TestCase(new object[] { }, ExpectedResult = 0)]
-        public int TagCountTest(params string[] value)
-        {
-            Item LocalItem;
-            try
-            {
-                LocalItem = new Item("testItem", tags: value);
-                return LocalItem.tags.Length;
-            }
-            catch
-            {
-                Assert.Fail();
-            }
-
-            return -1;
+            Assert.AreNotEqual(b.date_created, b.date_updated);
+            Assert.IsNotNull(b.date_created);
+            Assert.IsNotNull(b.date_updated);
         }
 
         [Test]
-        public void UserTest()
+        public void Test_ItemName()
         {
-            Assert.IsInstanceOf<string>(testUser.name);
-            Assert.IsNotNull(testUser.name);
+            Item i = new Item("Item Name");
+
+            Assert.AreEqual(i.name, "Item Name");
+            Assert.IsNotNull(i.name);
+            Assert.IsNull(i.description);
+            Assert.IsNull(i.tags);
         }
 
-        [TestCase("testUser", ExpectedResult = "testUser")]
-        [TestCase("testUser2", ExpectedResult = "testUser2")]
-        [TestCase(null, ExpectedResult = "user")]
-        public string UserNameTest(string value)
+        [Test]
+        public void Test_ItemDescription()
         {
-            User LocalUser;
-            try
-            {
-                LocalUser = new User(value);
-                Assert.IsNotNull(LocalUser.name);
-                return LocalUser.name;
-            }
-            catch
-            {
-                Assert.Fail();
-            }
+            Item i = new Item("Item Thing", "Item Description");
 
-            return null;
+            Assert.AreEqual(i.description, "Item Description");
+            Assert.IsNotNull(i.description);
+            Assert.IsNull(i.tags);
         }
 
-        [TestCase(1, ExpectedResult = 1)]
-        [TestCase(2, ExpectedResult = 2)]
-        [TestCase(0, ExpectedResult = 0)]
-        [TestCase(-1, ExpectedResult = 0)]
-        public int InventoryCreationTests(int value)
+        [Test]
+        public void Test_ItemPrice()
         {
-            Inventory LocalInventory;
-            try
-            {
-                LocalInventory = new Inventory(testUser, testItem, value);
-                Assert.IsNotNull(LocalInventory.user_id);
-                Assert.IsNotNull(LocalInventory.item_id);
-                Assert.AreEqual(LocalInventory.user_id, testUser.id);
-                Assert.AreEqual(LocalInventory.item_id, testItem.id);
-                return LocalInventory.quantity;
-            }
-            catch
-            {
-                Assert.Fail();
-                return -1;
-            }
+            Item i = new Item("Item Thing", "Item Description", 5.00f);
+
+            Assert.AreEqual(i.price, 5.00);
         }
 
-        [TestCase(1, ExpectedResult = 1)]
-        [TestCase(2, ExpectedResult = 2)]
-        [TestCase(0, ExpectedResult = 0)]
-        [TestCase(-1, ExpectedResult = 0)]
-        public int InventorySetQuantityTests(int value)
+        [Test]
+        public void Test_UserName()
         {
-            try
-            {
-                Inventory LocalInventory = new Inventory(testUser, testItem);
-                LocalInventory.quantity = value;
-                return LocalInventory.quantity;
-            }
-            catch
-            {
-                Assert.Fail();
-                return -1;
-            }
+            User u = new User("User Name");
+
+            Assert.AreEqual(u.name, "User Name");
+        }
+
+        [Test]
+        public void Test_InventoryUserId()
+        {
+            Inventory inventory = new Inventory("User ID", "Item ID", 1);
+
+            Assert.AreEqual(inventory.user_id, "User ID");
+            Assert.AreNotEqual(inventory.user_id, "Item ID");
+        }
+
+        [Test]
+        public void Test_InventoryItemId()
+        {
+            Inventory inventory = new Inventory("User ID", "Item ID", 1);
+
+            Assert.AreEqual(inventory.item_id, "Item ID");
+            Assert.AreNotEqual(inventory.item_id, "User ID");
+        }
+
+        [Test]
+        public void Test_InventoryQuantityPos()
+        {
+            Inventory inventory = new Inventory("User ID", "Item ID", 1);
+
+            Assert.AreEqual(inventory.quantity, 1);
+            Assert.AreNotEqual(inventory.item_id, inventory.user_id);
+        }
+
+        [Test]
+        public void Test_InventoryQuantityZero()
+        {
+            Inventory inventory = new Inventory("User ID", "Item ID", 0);
+
+            Assert.AreEqual(inventory.quantity, 1);
+            Assert.AreNotEqual(inventory.quantity, 0);
+        }
+
+        [Test]
+        public void Test_InventoryQuantityNeg()
+        {
+            Inventory inventory = new Inventory("User ID", "Item ID", -1);
+
+            Assert.AreEqual(inventory.quantity, 1);
+            Assert.AreNotEqual(inventory.quantity, -1);
+        }
+
+        [Test]
+        public void Test_JSONStorage()
+        {
+            JSONStorage storage= new JSONStorage();
+            Dictionary<string, object> example = new Dictionary<string, object>();
+
+            Assert.AreEqual(storage.objects, example);
         }
     }
 }
