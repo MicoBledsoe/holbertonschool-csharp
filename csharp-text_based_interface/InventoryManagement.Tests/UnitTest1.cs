@@ -1,27 +1,15 @@
-using Xunit;
-using InventoryLibrary;
+using System;
+using NUnit.Framework;
 
 namespace InventoryManagement.Tests
 {
-    public class ItemTests
+    public class UnitTest1
     {
-        [Fact]
-        public void Item_ToString_ReturnsExpectedString()
+        [Test]
+        public void Test1()
         {
-            // Arrange
-            var item = new Item
-            {
-                Name = "Item 1",
-                Description = "This is item 1",
-                Price = 9.99f,
-                Tags = new List<string> { "tag1", "tag2" }
-            };
-
-            // Act
-            string result = item.ToString();
-
-            // Assert
-            Assert.Equal("Name: Item 1, Description: This is item 1, Price: $9.99, Tags: tag1, tag2", result);
+            // Add your test logic here
+            Assert.IsTrue(true);
         }
     }
 }

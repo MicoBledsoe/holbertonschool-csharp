@@ -1,24 +1,27 @@
-using System;
 using System.Collections.Generic;
+using System;
 
 namespace InventoryLibrary
 {
     public class Item : BaseClass
     {
-        // Required property
         public string Name { get; set; }
-
-        // Optional properties
         public string Description { get; set; }
         public float Price { get; set; }
-        public List<string> Tags { get; set; }
 
-        public Item(string name)
+        public Item(string id, string name, string description, float price)
         {
-            this.Name = name;
-            this.Id = Guid.NewGuid().ToString();
-            this.DateCreated = DateTime.UtcNow;
-            this.DateUpdated = DateTime.UtcNow;
+            Id = id;
+            Name = name;
+            Description = description;
+            Price = price;
+            DateCreated = DateTime.Now;
+            DateUpdated = DateTime.Now;
+        }
+
+        public override string ToString()
+        {
+            return $"ID: {Id}\nName: {Name}\nDescription: {Description}\nPrice: {Price}\nCreated: {DateCreated}\nUpdated: {DateUpdated}";
         }
     }
 }
