@@ -1,28 +1,63 @@
 using System;
 
-///<summary>Interface called IInteractive</summary>
+/// Abstract class named Base
+public abstract class Base
+{
+    /// <summary>Property</summary>
+    private string name { get; set; }
+
+    /// <summary>
+    /// ToString method overrided
+    /// </summary>
+    public override string ToString() => $"{this.name} is a {this.GetType()}";
+        
+}
+/// <summary>IInteractive interface</summary>
 public interface IInteractive
 {
-    ///<summary>Method Interact</summary>
+    /// <summary>Interact method</summary>
     void Interact();
 }
-
-///<summary>Interface called IBreakable</summary>
+/// <summary>IBreakable interface</summary>
 public interface IBreakable
 {
-    ///<summary>Property durability</summary>
+    /// <summary>Property</summary>
     int durability { get; set; }
-
-    ///<summary>Method Break</summary>
+    /// <summary>Break method</summary>
     void Break();
 }
-
-///<summary>Interface called ICollectable</summary>
+/// <summary>ICollectable interface</summary>
 public interface ICollectable
 {
-    ///<summary>Property isCollected</summary>
+    /// <summary>Property</summary>
     bool isCollected { get; set; }
-
-    ///<summary>Method Collect</summary>
+    /// <summary>Method</summary>
     void Collect();
+}
+
+/// <summary>TestObject class that inherits from Base and all three interfaces.</summary>
+public class TestObject : Base, IInteractive, IBreakable, ICollectable
+{
+    /// <summary>Property durability</summary>
+    public int durability {
+        get => throw new NotImplementedException();
+        set => throw new NotImplementedException();
+    }
+    /// <summary>Property isCollected</summary>
+    public bool isCollected {
+        get => throw new NotImplementedException();
+        set => throw new NotImplementedException();
+    }
+    /// <summary>Property name</summary>
+    public string name {
+        get => throw new NotImplementedException();
+        set => throw new NotImplementedException();
+    }
+    // This meethods do not need to fully implement yet.
+    /// <summary>Interact method</summary>
+    public void Interact() { throw new NotImplementedException(); }
+    /// <summary>Break method</summary>
+    public void Break() { throw new NotImplementedException(); }
+    /// <summary>Method</summary>
+    public void Collect() { throw new NotImplementedException(); }
 }
