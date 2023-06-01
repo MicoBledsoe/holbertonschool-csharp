@@ -2,17 +2,24 @@ using System;
 
 namespace InventoryLibrary
 {
+    /// <summary>
+    /// User class that inherit from BaseClass
+    /// </summary>
     public class User : BaseClass
     {
-        // Required property
-        public string Name { get; set; }
+        /// <summary>
+        /// name of user created
+        /// </summary>
+        /// <value>name of user</value>
+        public string name { get; set; }
 
+        /// <summary>
+        /// constructor to set the name
+        /// </summary>
+        /// <param name="name">name passed by user</param>
         public User(string name)
         {
-            this.Name = name;
-            this.Id = Guid.NewGuid().ToString();
-            this.DateCreated = DateTime.UtcNow;
-            this.DateUpdated = DateTime.UtcNow;
+            this.name = name;
         }
     }
 }
