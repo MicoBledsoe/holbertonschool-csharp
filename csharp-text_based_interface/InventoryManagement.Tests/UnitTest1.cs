@@ -1,5 +1,6 @@
 using Xunit;
 using InventoryLibrary;
+using InventoryLibrary;
 
 namespace InventoryManagement.Tests
 {
