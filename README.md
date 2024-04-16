@@ -43,17 +43,6 @@ To run a project:
 bash
 dotnet run
 
-
-### Part 4: Contributions and License
-#```markdown
-## Contributions
-
-Contributions to this repository are welcome. To contribute, please fork the repository, make your changes, and submit a pull request.
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file in the root directory for details.
-
 ## Contact Information
 
 - **Mico Bledsoe** - [GitHub Profile](https://github.com/MicoBledsoe)
