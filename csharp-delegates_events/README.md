@@ -52,5 +52,5 @@ This compiles the C# files and executes the resulting application, allowing you 
 
 Understanding delegates and events is crucial for advanced C# programming, particularly when building applications that require components to communicate efficiently without being tightly coupled. These projects provide foundational knowledge and practical experience in using these features effectively.
 
-##Collaborators
+## Collaborators
 Mico Bledsoe** - (www.linkedin.com/in/micobledsoe)
